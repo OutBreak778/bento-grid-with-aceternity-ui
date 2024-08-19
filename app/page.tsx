@@ -1,112 +1,156 @@
+"use client";
+
+import { cn } from "@/lib/utils";
+import { ArrowDownRight } from "lucide-react";
+import { Asap, Comfortaa } from "next/font/google";
 import Image from "next/image";
+import { useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
+import banner from "../public/img1.webp";
+import { DirectionAwareHover } from "../components/ui/direction-aware-hover";
+import { MaskContainer } from "@/components/ui/svg-mask-effect";
+import { Highlight } from "@/components/Highlight";
+import { CardStack } from "@/components/ui/card-stack";
+
+const inter = Asap({ subsets: ["latin"], weight: "600" });
+const para = Comfortaa({ subsets: ["latin"], weight: "400" });
+
+const CARDS = [
+  {
+    id: 0,
+    name: "Manu Arora",
+    designation: "Senior Software Engineer",
+    content: (
+      <p>
+        This project offers seamless Stripe integration, allowing you to
+        <Highlight>securely process payments </Highlight> with ease. It ensures
+        a smooth transaction experience, making payment handling effortless and
+        reliable. 🙏
+      </p>
+    ),
+  },
+  {
+    id: 1,
+    name: "Elon Musk",
+    designation: "Senior Shitposter",
+    content: (
+      <p>
+        You can instantly check and manage form{" "}
+        <Highlight>responses in real-time</Highlight>, thanks to the intuitive
+        tracking system. This feature keeps all submissions organized and{" "}
+        <Highlight>easily accessible </Highlight>whenever you need them.
+      </p>
+    ),
+  },
+  {
+    id: 2,
+    name: "Tyler Durden",
+    designation: "Manager Project Mayhem",
+    content: (
+      <p>
+        The project also boasts a beautifully designed,{" "}
+        <Highlight>responsive user interface</Highlight>. It provides an
+        engaging and consistent experience across all devices, making it{" "}
+        <Highlight>both visually appealing and user-friendly</Highlight>.
+      </p>
+    ),
+  },
+];
 
 export default function Home() {
+  const ref = useRef(null);
+
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+
+  const translateY = useTransform(scrollYProgress, [0, 1], [150, -150]);
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <main
+      ref={ref}
+      className="flex min-h-screen mx-12 relative flex-col items-center justify-between"
+    >
+      <div className="w-full h-[85vh]">
+        <div className="flex flex-col md:flex-row h-full gap-3">
+          <div className="flex w-full md:w-1/2 h-auto">
+            {/* Left side */}
+            <div className="flex flex-col w-full gap-3">
+              {/* Upper part */}
+              <div className="h-[70vh]">
+                <div className="h-full relative flex flex-col py-10 sm:py-4 md:py-3 sm:px-2 md:px-2 items-center justify-between rounded-[28px] bg-[#e1e2f3]">
+                  <h1
+                    className={cn(
+                      "font-bold text-4xl mt-4 sm:text-5xl md:text-4xl lg:text-6xl px-4 sm:mt-2 md:mt-5 py-4 sm:py-6 leading-tight",
+                      inter.className
+                    )}
+                  >
+                    Create Smart, Dynamic Forms Effortlessly with{" "}
+                    <p className="bg-clip-text text-transparent bg-gradient-to-br from-purple-500 to-pink-500 underline underline-offset-2">
+                      FORMULATEAI
+                    </p>
+                  </h1>
+                  <p
+                    className={cn(
+                      "mr-4 text-[15px] mb-4 lg:mr-2 flex items-start justify-start px-4 my-10",
+                      para.className
+                    )}
+                  >
+                    FormulateAI leverages advanced AI to automatically generate
+                    customized forms with ease. Designed by Nikhil, it
+                    simplifies form creation, making it intuitive and efficient
+                    for any project.
+                  </p>
+                </div>
+              </div>
+              <div className="flex w-full h-[30vh]">
+                <div className="flex flex-row md:flex-row w-full justify-between gap-x-2">
+                  <div className="relative w-full sm:w-[40vw] md:w-[23rem] md:h-full sm:h-1/3">
+                    <video
+                      autoPlay
+                      muted
+                      loop
+                      className="rounded-[35px] aspect-auto"
+                    >
+                      <source src="https://aem.dropbox.com/cms/content/dam/dropbox/warp/en-us/dash/dbx-header-blur-1920x1080.mp4" />
+                    </video>
+                  </div>
+                  <div className="bg-[#f97d36] hidden sm:flex relative rounded-[35px] w-[19rem] h-40 md:w-[23vw] md:h-[96%] items-center justify-center">
+                    <ArrowDownRight
+                      size={180}
+                      strokeWidth={1}
+                      className="text-white"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="p-5 w-full  relative sm:w-1/2 bg-gray-900 h-full rounded-[35px]">
+            <div className="h-full flex sm:flex-col md:flex-row gap-4">
+            <div>
+              <DirectionAwareHover imageUrl={banner}>
+                <p className="hidden md:block">
+                  Innovative, user-friendly form builder.
+                </p>
+              </DirectionAwareHover>
+            </div>
+            <div className="text-white w-1/3">
+              <div className="h-full w-full p-2">
+                <p className="mb-2 bg-[#e1e2f3] text-gray-900 relative rounded-[28px] h-1/3 px-4 text-lg font-bold py-4 w-60">
+                  Welcome to our new innovative <Highlight>AI-driven form</Highlight>
+                  creation project, expertly crafted by Nikhil Mishra
+                </p>
+                <div className="mt-2 hidden md:block rounded-[32px] h-2/3">
+                  <CardStack items={CARDS} />
+                </div>
+              </div>
+            </div>
+            </div>
+          </div>
         </div>
-      </div>
-
-      <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
       </div>
     </main>
   );
